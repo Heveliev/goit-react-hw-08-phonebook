@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const ContactInput = styled.input`
+export const CreateInput = styled.input`
 padding:5px;
 width:250px;
 height:30px;

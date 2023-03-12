@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { ContactInput, Title } from './Input.styled';
+import { CreateInput, Title } from './Input.styled';
 
 
 
@@ -8,7 +8,7 @@ import { ContactInput, Title } from './Input.styled';
 export const Input = ({type,pattern,name,title,titleBox}) =>{
     return(<>
     <Title>{titleBox}
-    <ContactInput
+    <CreateInput
     type={type}
     pattern={pattern}
     name={name}
