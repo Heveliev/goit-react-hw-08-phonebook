@@ -3,8 +3,8 @@ import { Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import { getIsLoggedIn } from 'redux/auth/auth-selectors';
 import { Flex, Spacer, IconButton, useColorMode, Box, HStack } from '@chakra-ui/react';
-import { RotatingLines } from 'react-loader-spinner';
 import { SunIcon, MoonIcon } from '@chakra-ui/icons';
+import { Spinner } from '@chakra-ui/react';
 
 import { AuthNav } from 'components/AuthNav/AuthNav';
 import { UserMenu } from '../UserMenu/UserMenu';
@@ -15,8 +15,8 @@ export const AppBar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
     return ( <>
         <header>
-        <Flex bg="gray.700" w="100%" p={4} color="white" alignItems="center">
-          {IsLoggedIn ? <NavLink to ='/contacts'>Contacts</NavLink> : <NavLink to='/'>Home</NavLink>}
+        <Flex fontSize="xl" bg="gray.700" w="100%" p={4} color="white" alignItems="center">
+          {IsLoggedIn ? <NavLink  to ='/contacts'>Contacts</NavLink> : <NavLink to='/'>Home</NavLink>}
             <Spacer />
           {IsLoggedIn ? <UserMenu/> :<AuthNav/>}
       <HStack spacing={4}>
@@ -34,10 +34,12 @@ export const AppBar = () => {
         top="50%"
         left="50%"
         transform="translate(-50%, -50%)">
-        <RotatingLines strokeColor="grey"
-          strokeWidth="5"
-          animationDuration="0.75"
-          width="96" visible={true} />
+        <Spinner thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='blue.500'
+          size='xl'
+        />
       </Box>}>
           <Outlet />
           </Suspense>

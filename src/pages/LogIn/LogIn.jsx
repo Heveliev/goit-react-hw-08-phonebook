@@ -26,14 +26,16 @@ function LogIn() {
           <Stack spacing={4}>
             <FormControl>
               <FormLabel>Email address
-              <Input
+                <Input
+                  borderWidth="2px"
                   type="email"
                   name="email"
                 /></FormLabel>
             </FormControl>
             <FormControl>
               <FormLabel>Password
-              <Input
+                <Input
+                  borderWidth="2px"
                 type="password"
                 name="password"
               /></FormLabel>

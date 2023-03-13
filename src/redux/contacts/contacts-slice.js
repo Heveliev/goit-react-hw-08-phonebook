@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchAllContacts, addContact, deleteContact } from './thunk';
+import { fetchAllContacts, addContact, deleteContact } from './contacts-thunk';
 import { isAnyOf } from '@reduxjs/toolkit';
 
 
@@ -18,7 +18,6 @@ const handleDeleteContatcs = (state, action) => {
   const idx = state.items.findIndex(item => item.id === action.payload.id);
   state.items.splice(idx, 1);
 };
-
 
 export const contactsSlice = createSlice({
     name: 'contacts',
@@ -52,4 +51,3 @@ export const contactsSlice = createSlice({
       ),
 
 })
-

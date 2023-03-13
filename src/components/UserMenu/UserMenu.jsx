@@ -7,9 +7,9 @@ export const UserMenu = () => {
   const dispatch = useDispatch()
   const email = useSelector(getUserEmail)
     return (
-      <Flex align="center">
-      <Box mr={2}>
-        <Text fontWeight="bold">{email}</Text>
+      <Flex fontSize="15px" align="center">
+      <Box  mr={2}>
+        <Text  fontWeight="bold">{email}</Text>
       </Box>
       <Button onClick={()=>dispatch(logOut())} size="sm" variant="ghost">
         Log Out

@@ -30,6 +30,7 @@ import { register } from 'redux/auth/auth-thunk';
             <FormControl id="name">
               <FormLabel>Name
                 <Input
+                  borderWidth="2px"
                   type="text"
                   name="name"
                   pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -38,6 +39,7 @@ import { register } from 'redux/auth/auth-thunk';
             <FormControl>
               <FormLabel>Email address
                 <Input
+                  borderWidth="2px"
                   type="email"
                   name="email"
                 /></FormLabel>
@@ -45,6 +47,7 @@ import { register } from 'redux/auth/auth-thunk';
             <FormControl >
               <FormLabel>Password
                 <Input
+                  borderWidth="2px"
                   type="password"
                   name="password"
                 /></FormLabel>
