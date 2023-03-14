@@ -6,6 +6,7 @@ import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
 
 
+
 const Home = lazy(() => import('../pages/Home/Home'));
 const LogIn = lazy(() => import('../pages/LogIn/LogIn'));
 const SignUp = lazy(() => import('../pages/SignUp/SignUp'));
@@ -39,7 +40,7 @@ const App = () => {
           }
         />
 </Route>
-      </Routes>
+    </Routes>
      </ChakraProvider>  
   )
 }

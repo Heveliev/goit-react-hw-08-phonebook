@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchAllContacts, addContact, deleteContact } from './contacts-thunk';
+import { fetchAllContacts, addContact, deleteContact, editContact} from './contacts-thunk';
 import { isAnyOf } from '@reduxjs/toolkit';
 
 
 
-const actions = [fetchAllContacts, addContact, deleteContact];
+const actions = [fetchAllContacts, addContact, deleteContact,editContact];
 
 const handleFetchContatcs = (state, action) => {
   state.items = action.payload;
@@ -31,7 +31,8 @@ export const contactsSlice = createSlice({
     builder
       .addCase(fetchAllContacts.fulfilled, handleFetchContatcs)
       .addCase(addContact.fulfilled, handleAddContatcs)
-      .addCase(deleteContact.fulfilled, handleDeleteContatcs)
+     .addCase(deleteContact.fulfilled, handleDeleteContatcs)
+     .addCase(editContact.fulfilled, handleAddContatcs)
       .addMatcher(
         isAnyOf(...actions.map(action => action.fulfilled)),
         state => {

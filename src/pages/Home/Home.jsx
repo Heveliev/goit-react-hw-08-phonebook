@@ -7,15 +7,17 @@ const Home = () => {
         <Heading>Welcome to phonebook</Heading>
         <Text fontSize="xl" mt={4} mb={8}>
           If you're not with us yet then click by all means{" "}
-                   <Button colorScheme="blue" size="sm">
-                       <NavLink to='/register' >Signup</NavLink>
-                   </Button>
+                   
+                       <NavLink to='/register' ><Button colorScheme="blue" size="sm">Signup</Button></NavLink>
+                   
         </Text>
         <Text fontSize="xl">
-          If you already have an account then{" "}
+           If you already have an account then{" "}
+           <NavLink  to='/login'>
           <Button colorScheme="green" size="sm">
-          <NavLink to='/login'>Login</NavLink>
-          </Button>
+          Login
+             </Button>
+             </NavLink>
         </Text>
       </Box>
     </Box>
