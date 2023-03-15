@@ -13,14 +13,17 @@ import {
 } from "@chakra-ui/react";
  import { Notify } from "notiflix";
 import { useDispatch, useSelector } from "react-redux";
-import { editContact } from "redux/contacts/contacts-thunk";
+import { editContact, fetchAllContacts } from "redux/contacts/contacts-thunk";
 import { getIsOpen } from "redux/modal/modal-select";
 import { isOpen } from "redux/modal/modal-slice";
 
-
-export function ModalWindow({name,number,id}) {
+export function ModalWindow({id,values}) {
     const open = useSelector(getIsOpen)
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const { name, number } = values;
+
+
+  
 
     const handleSubmit = evt => {
         evt.preventDefault();
@@ -32,8 +35,9 @@ export function ModalWindow({name,number,id}) {
      return
         }
     dispatch(editContact({ name:name, number:number, id }))
-        
-    form.reset();
+              dispatch(isOpen())
+      dispatch(fetchAllContacts())
+
     }
   return (
       <Modal isOpen={open} onClose={()=>dispatch(isOpen())}>

@@ -10,8 +10,10 @@ import { CloseIcon,EditIcon } from "@chakra-ui/icons";
 import { deleteContact } from 'redux/contacts/contacts-thunk';
 import { isOpen } from 'redux/modal/modal-slice';
 import { getIsOpen } from 'redux/modal/modal-select';
+import { useState } from 'react';
 
 export const ContactList = () => {
+  const [id, setId] = useState();
 const dispatch = useDispatch()
     const contacts = useSelector(getContacts);
 
@@ -20,7 +22,11 @@ const dispatch = useDispatch()
   const isOpenModal = useSelector(getIsOpen);
     const filterContacts = () => {
         return contacts?.filter(contact=>contact.name.toLowerCase().includes(filter))
-    }
+  }
+  const findContact = id => {
+  return contacts?.find(item => item.id === id);
+};
+  
 
 return (<>
     <Flex direction="column">
@@ -49,20 +55,20 @@ return (<>
               onClick={() => dispatch(deleteContact(contact.id))}
           />
           <IconButton
+          data-id={contact.id}
             position='absolute'
             bottom="0"
                       right="0"
               icon={<EditIcon/>}
               aria-label="Delete Contact"
               variant="ghost"
-              onClick={() => dispatch(isOpen())}
+            onClick={() => { dispatch(isOpen()); setId(contact.id) }}
           />
-           {isOpenModal && <Portal><ModalWindow id={contact.id} name={contact.name} number={contact.number} /></Portal>}
+
         </Box>
       ))}
   </Flex>
-
-  
+          <Portal>  {isOpenModal && <ModalWindow  id={id} values={findContact(id)} />}</Portal>
        </>
   );
 }
