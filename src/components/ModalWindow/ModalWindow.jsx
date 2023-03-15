@@ -33,11 +33,12 @@ export function ModalWindow({id,values}) {
    if (!name || !number) {
      Notify.failure('Sorry, but you didn&#180;t enter a value in the field')
      return
-        }
-    dispatch(editContact({ name:name, number:number, id }))
-              dispatch(isOpen())
-      dispatch(fetchAllContacts())
+      }
 
+  
+    dispatch(editContact({ name:name, number:number, id }))
+dispatch(fetchAllContacts())
+          dispatch(isOpen())
     }
   return (
       <Modal isOpen={open} onClose={()=>dispatch(isOpen())}>

@@ -18,6 +18,13 @@ const handleDeleteContatcs = (state, action) => {
   const idx = state.items.findIndex(item => item.id === action.payload.id);
   state.items.splice(idx, 1);
 };
+const handleEditContacts = (state, action) => {
+   const { id, updatedContact } = action.payload;
+  const index = state.items.findIndex(item => item.id === id);
+  if (index !== -1) {
+    state.items[index] = { ...state.items[index], ...updatedContact };
+  }
+};
 
 export const contactsSlice = createSlice({
     name: 'contacts',
@@ -32,7 +39,7 @@ export const contactsSlice = createSlice({
       .addCase(fetchAllContacts.fulfilled, handleFetchContatcs)
       .addCase(addContact.fulfilled, handleAddContatcs)
      .addCase(deleteContact.fulfilled, handleDeleteContatcs)
-     .addCase(editContact.fulfilled, handleAddContatcs)
+     .addCase(editContact.fulfilled, handleEditContacts)
       .addMatcher(
         isAnyOf(...actions.map(action => action.fulfilled)),
         state => {

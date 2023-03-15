@@ -45,6 +45,26 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 })
 
 
+export const logInRefresh = createAsyncThunk('auth/refresh',
+    async (_, thunkAPI) => {
+        const state = thunkAPI.getState();
+        const persistorToken = state.auth.token;
+        // console.log(token)
+        if (!persistorToken) {
+            return thunkAPI.rejectWithValue()
+            
+        }
+        token.set(persistorToken)
+        try {
+             const { data } = await axios.get('/users/current')
+        return data
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
+       
+})
+
+
 // export const fetchAllContacts = createAsyncThunk(
 //   'contacts/fetchAll',
 //   async (_, thunkAPI) => {

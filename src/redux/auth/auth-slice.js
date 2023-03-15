@@ -1,16 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { isAnyOf } from '@reduxjs/toolkit';
-import { register,logIn,logOut } from './auth-thunk';
+import { register,logIn,logOut, logInRefresh } from './auth-thunk';
 
 
 
 
-const actions = [register, logIn];
+const actions = [register, logIn,logInRefresh];
 
 const handleFetchAuth = (state, action) => {
     state.user = action.payload.user;
     state.token = action.payload.token;
 };
+const handleRefreshAuth = (state, action) => {
+  state.user = action.payload
+}
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -24,7 +27,8 @@ export const authSlice = createSlice({
  extraReducers: builder =>
     builder
       .addCase(register.fulfilled, handleFetchAuth)
-         .addCase(logIn.fulfilled, handleFetchAuth)
+     .addCase(logIn.fulfilled, handleFetchAuth)
+     .addCase(logInRefresh.fulfilled,handleRefreshAuth)
          .addCase(logOut.fulfilled,
              (state) => {
                  state.user = { name: null, email: null }

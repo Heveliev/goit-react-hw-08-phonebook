@@ -4,6 +4,9 @@ import { Route, Routes } from 'react-router-dom';
 import { AppBar } from '../components/AppBar/AppBar';
 import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { logInRefresh } from 'redux/auth/auth-thunk';
 
 
 
@@ -12,6 +15,12 @@ const LogIn = lazy(() => import('../pages/LogIn/LogIn'));
 const SignUp = lazy(() => import('../pages/SignUp/SignUp'));
 const Contacts = lazy(() => import('../pages/Contacts/Contacts'))
 const App = () => {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(logInRefresh())
+  },[dispatch])
 
 
   return (<ChakraProvider>
