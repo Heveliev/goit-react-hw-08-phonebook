@@ -20,7 +20,8 @@ export const authSlice = createSlice({
     initialState:{
         user: { name: null, email: null },
         token: null,
-        isLoggedIn: false,
+      isLoggedIn: false,
+        isRefreshing:false,
         error: null
   },
 
@@ -33,19 +34,25 @@ export const authSlice = createSlice({
              (state) => {
                  state.user = { name: null, email: null }
                  state.token = null
-                 state.isLoggedIn = false
+               state.isLoggedIn = false
+               state.isRefreshing = false;
             })
       .addMatcher(
         isAnyOf(...actions.map(action => action.fulfilled)),
           state => {
               state.isLoggedIn = true;
-          state.error = null;
+            state.error = null;
+            state.isRefreshing = false;
         }
-      )
+   )
+     .addMatcher(isAnyOf(...actions.map(action => action.pending)), state => {
+        state.isRefreshing = true;
+      })
       .addMatcher(
         isAnyOf(...actions.map(action => action.rejected)),
           (state, action) => {
-          state.error = action.payload;
+            state.error = action.payload;
+            state.isRefreshing = false;
         }
       ),
 

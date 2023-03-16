@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { Notify } from 'notiflix';
+
 
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
@@ -20,6 +22,7 @@ export const register = createAsyncThunk('auth/register', async ({name,email,pas
         token.set(data.token)
         return data
     } catch (error) {
+        Notify.failure('Sorry, but the email or password does not match.')
         return thunkAPI.rejectWithValue(error.message);
     }
 })
@@ -30,6 +33,7 @@ export const logIn = createAsyncThunk('auth/login', async ({ email, password }, 
         token.set(data.token)
         return data
     } catch (error) {
+                Notify.failure('Sorry, but the email or password does not match.')
         return thunkAPI.rejectWithValue(error.message);
     }
 })
@@ -40,6 +44,7 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
         await axios.post('/users/logout')
         token.unset()
     } catch (error) {
+                Notify.failure('Sorry, but the email or password does not match.')
         return thunkAPI.rejectWithValue(error.message);
     }
 })
@@ -59,6 +64,7 @@ export const logInRefresh = createAsyncThunk('auth/refresh',
              const { data } = await axios.get('/users/current')
         return data
         } catch (error) {
+                    Notify.failure('Sorry, but the email or password does not match.')
             return thunkAPI.rejectWithValue(error.message);
         }
        

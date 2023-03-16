@@ -1,12 +1,13 @@
 import { lazy } from 'react';
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, Spinner, Box } from '@chakra-ui/react';
 import { Route, Routes } from 'react-router-dom';
 import { AppBar } from '../components/AppBar/AppBar';
 import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { logInRefresh } from 'redux/auth/auth-thunk';
+import { getIsRefreshing } from 'redux/auth/auth-selectors';
 
 
 
@@ -17,6 +18,7 @@ const Contacts = lazy(() => import('../pages/Contacts/Contacts'))
 const App = () => {
 
   const dispatch = useDispatch();
+  const isRefreshg = useSelector(getIsRefreshing)
 
   useEffect(() => {
     dispatch(logInRefresh())
@@ -24,22 +26,30 @@ const App = () => {
 
 
   return (<ChakraProvider>
-    <Routes>
+    {isRefreshg ? <Box position="fixed"
+      top="50%"
+        left="50%"
+        transform="translate(-50%,-50%)"><Spinner
+    thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='blue.500'
+          size='xl'/></Box> : (<Routes>
       
       <Route path='/' element={<AppBar />}>
-
+        
         <Route index element={<Home />} />
 
          <Route
           path="register"
           element={
-            <RestrictedRoute redirectTo="/contacts" component={<SignUp />} />
+            <RestrictedRoute restricted redirectTo="/contacts" component={<SignUp />} />
           }
         />
         <Route
           path="login"
           element={
-            <RestrictedRoute redirectTo="/contacts" component={<LogIn/>} />
+            <RestrictedRoute restricted redirectTo="/contacts" component={<LogIn/>} />
           }
         />
                 <Route
@@ -49,7 +59,8 @@ const App = () => {
           }
         />
 </Route>
-    </Routes>
+    </Routes>)}
+    
      </ChakraProvider>  
   )
 }
