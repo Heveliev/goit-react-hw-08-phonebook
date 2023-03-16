@@ -12,7 +12,7 @@ import {Spinner} from "@chakra-ui/react";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter basename="phonebook">
+    <BrowserRouter basename="goit-react-hw-08-phonebook">
       <Provider store={store}>
         <PersistGate loading={<Spinner
         thickness='4px'
