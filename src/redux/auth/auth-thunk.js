@@ -44,7 +44,6 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
         await axios.post('/users/logout')
         token.unset()
     } catch (error) {
-                Notify.failure('Sorry, but the email or password does not match.')
         return thunkAPI.rejectWithValue(error.message);
     }
 })
@@ -64,7 +63,6 @@ export const logInRefresh = createAsyncThunk('auth/refresh',
              const { data } = await axios.get('/users/current')
         return data
         } catch (error) {
-                    Notify.failure('Sorry, but the email or password does not match.')
             return thunkAPI.rejectWithValue(error.message);
         }
        
