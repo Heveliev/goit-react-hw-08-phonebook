@@ -38,7 +38,7 @@ const App = () => {
       
       <Route path='/' element={<AppBar />}>
         
-        <Route index element={<Home />} />
+        <Route index path='/' element={<RestrictedRoute restricted redirectTo="/contacts" component={<Home />} />} />
 
          <Route
           path="register"
